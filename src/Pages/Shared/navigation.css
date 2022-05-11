@@ -1,0 +1,21 @@
+.btn-container{
+    /* background-color: aqua; */
+    padding: 25px;
+}
+.btn-nav{
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: green;
+    /* transition: transform .2s; */
+    transition: ease-in-out .3s;
+
+}
+.btn-nav:hover{
+    color: white;
+    background-color: orange;
+    border-radius: 5px;
+    /* transition: 0.5s; */
+    
+}
