@@ -28,6 +28,7 @@ const useUsers = () =>{
 
     const logout = () =>{
         setLoginStatus(false);
+        setUser('')
     }
 
     return{

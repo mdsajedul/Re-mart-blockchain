@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
-import useUsers from '../../hooks/useUsers';
+import useUserContext from '../../hooks/useUserContext';
 
 
 const ProductDetail = () => {
@@ -9,8 +9,12 @@ const ProductDetail = () => {
     const [product,setProduct] = useState([]);
     const [loader,setLoader] = useState(false);
     const [buyStatus,setBuyStatus] =useState(false)
+    const [yourRating,setYourRating] = useState(0);
+    const [yourReview,setYourReview] = useState('')
+    const [reviewMessage,setReviewMessage] = useState('Please buy product for review')
     const {productId} = useParams()
-    const {loginStatus,user} = useUsers()
+    const {loginStatus,user} = useUserContext()
+
     let navigate = useNavigate()
     
     
@@ -31,11 +35,17 @@ const ProductDetail = () => {
         console.log(user)
         console.log(loginStatus)
         if(loginStatus===false){
-            navigate(-1)
+            navigate('../../login')
         }
         else{
             setBuyStatus(true);
         }
+    }
+
+    const submitReview = () =>{
+        setBuyStatus(false)
+        console.log(buyStatus)
+        setReviewMessage('Thanks for sunmitting review')
     }
 
     const featureFound = (product?.features?.length > 0) ? true: false
@@ -119,6 +129,34 @@ const ProductDetail = () => {
 
 {/* writing rating review */}
 
+                    {
+                        buyStatus && loginStatus ?  
+                            <div>
+                                <h4>Leave a Review</h4>
+                                <form>
+                                <ReactStars
+                                    isHalf={true}
+                                    count={5}
+                                    // onChange={ratingChanged}
+                                    size={16}
+                                    color2={'#ffd700'} 
+                                />
+                                <textarea id="w3review" name="w3review" rows="4" cols="50">
+                                    Write your review
+                                </textarea>
+                                </form>
+
+                                <button onClick={submitReview}>Submit</button>
+                            </div>
+                        :
+                        <div>
+                            <p>{reviewMessage}</p>
+                            <p></p>
+                        </div>
+                       
+                    }
+
+                    
 
                 </div>
             </div>

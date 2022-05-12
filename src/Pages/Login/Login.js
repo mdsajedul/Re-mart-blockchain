@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from 'react-router-dom';
-import useUsers from '../../hooks/useUsers';
+import { useNavigate } from 'react-router-dom';
+import useUserContext from '../../hooks/useUserContext';
 import './login.css'
 
 
 const Login = () => {
-    const {login,user,loginStatus,message} = useUsers()
     let navigate = useNavigate();
-    let location = useLocation();
 
 
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data =>{
-        login(data.email, data.password)
-        console.log(data)
-    };
-    const usernameSet = () =>{
-        
-        setUsername()
-    }
-    const passwordSet = () =>{
-
-    }
+    const {login,user,loginStatus} = useUserContext()
+   
     const loginAddition =() =>{
-        login("sajedulislms@gmail.com","12345678");
+        console.log(username)
+        console.log(password)
+        login(username,password);
         if(loginStatus){ 
             const path = navigate(-1)? navigate(-1):'/home' 
             navigate(path )
@@ -39,19 +28,22 @@ const Login = () => {
             <div className='d-flex justify-content-center align-items-center'>
                 <div>
                     <h2 style={{color:'green'}}>Login</h2>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form>
                         <div>
                             <label>Username</label>
-                            <input onChange={usernameSet} type='text'  {...register("username", { required: true })} />
+                            <input onChange={(event)=>{
+                                setUsername(event.target.value)
+                            }} type='text' />
                         </div>
 
                         <div>
                             <label>Password</label>
-                            <input onChange={passwordSet} type='password' {...register("password", { required: true })} />
+                            <input onChange={(event)=>{
+                                setPassword(event.target.value)
+                            }} type='password' />
                         </div>
-                        
-                        <input onClick={loginAddition} type="submit" />
                     </form>
+                    <button className='login-btn' onClick={loginAddition} >Login</button>
                 </div>
             </div>
         </div>

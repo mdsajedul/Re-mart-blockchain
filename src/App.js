@@ -7,6 +7,7 @@ import { useState } from 'react';
 import introGif from './Assets/gif/intro-2.gif'
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import Login from './Pages/Login/Login';
+import UserProvider from './contexts/UserProvider';
 
 function App() {
 
@@ -28,16 +29,18 @@ function App() {
               <img  src={introGif} alt="" width='200px' height='200px'/>
         </div> 
         :
-        <BrowserRouter>
-        <Navigation></Navigation>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/home" element={<Home/>} />
-            <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>
-            <Route path="/home/product-detail/:productId" element={<ProductDetail/>}></Route>
-            <Route path="login" element={<Login/>} />
-          </Routes>
-        </BrowserRouter>
+        <UserProvider>
+          <BrowserRouter>
+            <Navigation></Navigation>
+              <Routes>
+                <Route path="/" element={<Home/>} />
+                <Route path="/home" element={<Home/>} />
+                <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>
+                <Route path="/home/product-detail/:productId" element={<ProductDetail/>}></Route>
+                <Route path="login" element={<Login/>} />
+              </Routes>
+            </BrowserRouter>
+        </UserProvider>
       }
       
 

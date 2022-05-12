@@ -3,10 +3,12 @@ import { HashLink } from 'react-router-hash-link';
 import './navigation.css'
 import logo from '../../Assets/icons/re-mart.svg';
 import { Link } from 'react-router-dom';
-import useUsers from '../../hooks/useUsers';
+import useUserContext from '../../hooks/useUserContext';
 
 const Navigation = () => {
-    const {loginStatus,logout} = useUsers()
+    
+    const {loginStatus,logout} = useUserContext()
+
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
