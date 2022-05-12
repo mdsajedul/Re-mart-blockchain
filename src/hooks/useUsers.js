@@ -26,12 +26,17 @@ const useUsers = () =>{
          console.log(result);
     }
 
+    const logout = () =>{
+        setLoginStatus(false);
+    }
+
     return{
         users,
         login,
         message,
         user,
-        loginStatus
+        loginStatus,
+        logout
     }
 }
 export default useUsers;

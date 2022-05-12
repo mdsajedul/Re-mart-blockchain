@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
+import useUsers from '../../hooks/useUsers';
 
 
 const ProductDetail = () => {
    
     const [product,setProduct] = useState([]);
     const [loader,setLoader] = useState(false);
+    const [buyStatus,setBuyStatus] =useState(false)
     const {productId} = useParams()
+    const {loginStatus,user} = useUsers()
+    let navigate = useNavigate()
     
     
 
@@ -22,6 +26,18 @@ const ProductDetail = () => {
         
     },[productId])
 
+
+    const buyButton =()=>{
+        console.log(user)
+        console.log(loginStatus)
+        if(loginStatus===false){
+            navigate(-1)
+        }
+        else{
+            setBuyStatus(true);
+        }
+    }
+
     const featureFound = (product?.features?.length > 0) ? true: false
 
     return (
@@ -31,7 +47,8 @@ const ProductDetail = () => {
                 <div className='row pt-5'>
                     <div className='col-lg-4'>
                         <img  src={product?.img} alt="" /> <br />
-                        <button className='btn btn-primary w-100 p-2 mt-5'>Buy Now</button>
+                        
+                        <button onClick={buyButton} className='btn btn-primary w-100 p-2 mt-5'>Buy Now</button>
                     </div>
                     <div className='col-lg-8'>
                         <p>{product?.name}</p>
@@ -100,7 +117,7 @@ const ProductDetail = () => {
                         <hr />
                     </div>
 
-
+{/* writing rating review */}
 
 
                 </div>

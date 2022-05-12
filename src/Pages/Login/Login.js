@@ -10,6 +10,7 @@ const Login = () => {
     let navigate = useNavigate();
     let location = useLocation();
 
+
     const [username,setUsername] = useState('')
     const [password,setPassword] = useState('')
     const { register, handleSubmit } = useForm();
@@ -26,9 +27,10 @@ const Login = () => {
     }
     const loginAddition =() =>{
         login("sajedulislms@gmail.com","12345678");
-        // if(loginStatus){
-        //     // navigate("/")
-        // }
+        if(loginStatus){ 
+            const path = navigate(-1)? navigate(-1):'/home' 
+            navigate(path )
+        }
         console.log(user)
 
     }
