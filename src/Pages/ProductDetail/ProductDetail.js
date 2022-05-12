@@ -42,9 +42,20 @@ const ProductDetail = () => {
         }
     }
 
+    const ratingChanged =(value)=>{
+        setYourRating(value)
+    }
+
+
+
+// all value for blockchain submit from submit review function 
+
+
     const submitReview = () =>{
         setBuyStatus(false)
         console.log(buyStatus)
+        console.log(yourRating)
+        console.log(yourReview)
         setReviewMessage('Thanks for sunmitting review')
     }
 
@@ -137,11 +148,13 @@ const ProductDetail = () => {
                                 <ReactStars
                                     isHalf={true}
                                     count={5}
-                                    // onChange={ratingChanged}
-                                    size={16}
+                                    onChange={ratingChanged}
+                                    size={28}
                                     color2={'#ffd700'} 
                                 />
-                                <textarea id="w3review" name="w3review" rows="4" cols="50">
+                                <textarea onChange={(event)=>{
+                                    setYourReview(event.target.value)
+                                }} rows="4" cols="50">
                                     Write your review
                                 </textarea>
                                 </form>
