@@ -6,6 +6,7 @@ import Navigation from './Pages/Shared/Navigation';
 import { useState } from 'react';
 import introGif from './Assets/gif/intro-2.gif'
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
+import Login from './Pages/Login/Login';
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
             <Route path="/home" element={<Home/>} />
             <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>
             <Route path="/home/product-detail/:productId" element={<ProductDetail/>}></Route>
-            {/* <Route path="about" element={<About />} /> */}
+            <Route path="login" element={<Login/>} />
           </Routes>
         </BrowserRouter>
       }

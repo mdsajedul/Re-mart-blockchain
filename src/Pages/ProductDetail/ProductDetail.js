@@ -23,10 +23,6 @@ const ProductDetail = () => {
     },[productId])
 
     const featureFound = (product?.features?.length > 0) ? true: false
-    console.log(featureFound)
-
-     console.log(product?.features?.length)
-
 
     return (
         <div className='container p-4'>

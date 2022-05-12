@@ -5,7 +5,6 @@ import useProducts from '../../hooks/useProducts';
 
 const Home = () => {
     const {loader,products} = useProducts();
-    console.log(products)
     
     const productClick = () =>{
 
@@ -24,13 +23,13 @@ const Home = () => {
                         <div className='row m-3 ' onClick={productClick}>
                             
                                 <div className='col-lg-8'>
-                                    <p><b> {product.name}</b> </p>
-                                    <p>Seller: {product.seller}</p>
-                                    <p>Price: {product.price}</p>
-                                    <p>Stock: {product.stock}</p>
+                                    <p><b> {product?.name}</b> </p>
+                                    <p>Seller: {product?.seller}</p>
+                                    <p>Price: {product?.price}</p>
+                                    <p>Stock: {product?.stock}</p>
                                 </div>
                                 <div className='col-lg-4'>
-                                    <img src={product.img} alt="" />
+                                    <img src={product?.img} alt="" />
                                 </div>
                             
                              <hr />
