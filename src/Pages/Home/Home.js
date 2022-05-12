@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useProducts from '../../hooks/useProducts';
+import './home.css'
 
 
 const Home = () => {
@@ -19,10 +20,10 @@ const Home = () => {
             <div section='products' className='product-showcase'>
                 {
                     products.map(product=> 
-                        <Link to ={`product-detail/${product.key}`}>
-                        <div className='row m-3 ' onClick={productClick}>
+                        <Link className='product-card' to ={`product-detail/${product.key}`}>
+                        <div className='row m-3 product-card' onClick={productClick}>
                             
-                                <div className='col-lg-8'>
+                                <div className='col-lg-8 product-detail'>
                                     <p><b> {product?.name}</b> </p>
                                     <p>Seller: {product?.seller}</p>
                                     <p>Price: {product?.price}</p>
