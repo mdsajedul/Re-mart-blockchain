@@ -7,8 +7,9 @@ import useUserContext from '../../hooks/useUserContext';
 
 const Navigation = () => {
     
-    const {loginStatus,logout} = useUserContext()
+    const {loginStatus,logout,user,socket} = useUserContext()
 
+console.log(socket)
     return (
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -26,10 +27,18 @@ const Navigation = () => {
                             </div>
                         </li>
                     </ul>
-                    {
-                        loginStatus? <button onClick={logout}>Logout</button> :
-                        <Link to="login" className='btn btn-primary '>Login</Link>
-                    }
+                    <div>
+                        {
+                            loginStatus? (
+                            <div className='d-flex align-items-baseline'>
+                                <p className='me-3' style={{color:"#666666"}}>Hello <span style={{color:'#206020'}}>{user.username}</span></p>
+                                <button className='btn btn-danger' onClick={()=>{logout()}}>Logout</button>
+                            </div>
+                            ) :
+                            <Link to="login" className='btn btn-primary '>Login</Link>
+                        }
+                    </div>
+                    
                     
                 </div>
             </div>

@@ -74,7 +74,7 @@ const ProductDetail = () => {
                     <div className='col-lg-8'>
                         <p>{product?.name}</p>
                         <p>Price: {product?.price}</p>
-                        <p>{product?.features?.length}</p>
+                        {/* <p>{product?.features?.length}</p> */}
                         <p>Shipping cost: {product?.shipping}</p>
                         {
                             featureFound ?
@@ -159,7 +159,7 @@ const ProductDetail = () => {
                                 </textarea>
                                 </form>
 
-                                <button onClick={submitReview}>Submit</button>
+                                <button className='btn btn-primary' onClick={submitReview}>Submit</button>
                             </div>
                         :
                         <div>

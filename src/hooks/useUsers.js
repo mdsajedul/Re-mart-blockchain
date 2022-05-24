@@ -1,29 +1,33 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
+import io from "socket.io-client";
 
 const useUsers = () =>{
     
-    const [users,setUsers] = useState([])
+    
     const [message,setMessage] = useState('')
     const [user, setUser] = useState({})
-    const [loginStatus,setLoginStatus] =useState('false')
+    const [loginStatus,setLoginStatus] =useState(false)
+    // const [socket,setSocket] = useState();
 
-    useEffect(()=>{
-        fetch('/users.json')
-        .then(res=>res.json())
-        .then(data=>{
-            setUsers(data)
-        })
-    },[])
+
+    const socket = io.connect("http://localhost:8000");
 
     const login = (email,password) =>{
-        console.log(email,password)
-         const result =  users.find(user=>user.email === email )
-         if(result?.password===password){
-            setMessage('Login Successful');
-            setUser(result)
+
+        axios.post(`http://localhost:8000/login`,{
+            email:email,
+            password:password
+        })
+        .then((response)=>{
+            setUser(response.data.user)
+            setMessage(response.data.message)
             setLoginStatus(true)
-         }
-         console.log(result);
+        })
+        .catch((error)=>{
+            setMessage(error.data.message)
+            console.log(message)
+        })
     }
 
     const logout = () =>{
@@ -32,12 +36,12 @@ const useUsers = () =>{
     }
 
     return{
-        users,
         login,
         message,
         user,
         loginStatus,
-        logout
+        logout,
+        socket
     }
 }
 export default useUsers;

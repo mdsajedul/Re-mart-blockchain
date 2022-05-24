@@ -12,7 +12,8 @@ const Login = () => {
     const [password,setPassword] = useState('')
     const {login,user,loginStatus} = useUserContext()
    
-    const loginAddition =() =>{
+    const loginAddition =(e) =>{
+        e.preventDefault()
         console.log(username)
         console.log(password)
         login(username,password);
