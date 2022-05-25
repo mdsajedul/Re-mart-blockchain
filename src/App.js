@@ -10,6 +10,7 @@ import Login from './Pages/Login/Login';
 import UserProvider from './contexts/UserProvider';
 import SocketProvider from './contexts/SocketProvider';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
+import PrivateRoute from './Pages/Login/PrivateRoute';
 
 function App() {
 
@@ -41,7 +42,7 @@ function App() {
                 <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>
                 <Route path="/home/product-detail/:productId" element={<ProductDetail/>}></Route>
                 <Route path="login" element={<Login/>} />
-                <Route path="/dashboard" element={<Dashboard/>} />
+                <Route path="/dashboard/*" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
               </Routes>
             </BrowserRouter>
         </SocketProvider>

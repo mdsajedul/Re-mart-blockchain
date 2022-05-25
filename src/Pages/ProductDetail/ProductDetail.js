@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import useUserContext from '../../hooks/useUserContext';
+import useSocketContext from '../../hooks/useSocketContext';
 
 
 const ProductDetail = () => {
@@ -14,10 +15,13 @@ const ProductDetail = () => {
     const [reviewMessage,setReviewMessage] = useState('Please buy product for review')
     const {productId} = useParams()
     const {loginStatus,user} = useUserContext()
+    const {socket} = useSocketContext()
 
     let navigate = useNavigate()
     
-    
+    // useEffect(()=>{
+        
+    // })
 
     useEffect(()=>{
         setLoader(true);
@@ -51,11 +55,22 @@ const ProductDetail = () => {
 // all value for blockchain submit from submit review function 
 
 
-    const submitReview = () =>{
+    const submitReview = async () =>{
         setBuyStatus(false)
-        console.log(buyStatus)
-        console.log(yourRating)
-        console.log(yourReview)
+
+        const reviewInfo ={
+            username: user.username,
+            role:user.role,
+            reviewData:{
+                rating: yourRating,
+                review: yourReview,
+                product_id: product.key
+            }
+            
+        }
+        console.log(reviewInfo)
+
+        await socket.emit("submit_review",reviewInfo)
         setReviewMessage('Thanks for sunmitting review')
     }
 

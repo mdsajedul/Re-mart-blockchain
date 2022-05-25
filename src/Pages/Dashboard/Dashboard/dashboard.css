@@ -1,0 +1,38 @@
+.left-panel{
+    margin-right: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.left-panel .profile-picture{
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    margin: 10px;
+}
+
+.right-panel{
+    margin-left: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    padding: 20px;
+}
+.left-btn-group{
+    display: inline-block;
+}
+.left-btn{
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 7px;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 5px;
+    padding: 7px 10px;
+    
+}
+.left-btn:focus{
+    background-color: blue;
+    color: white;
+}

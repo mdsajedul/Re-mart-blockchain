@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useUserContext from '../../hooks/useUserContext';
 import './login.css'
@@ -17,13 +17,17 @@ const Login = () => {
         console.log(username)
         console.log(password)
         login(username,password);
-        if(loginStatus){ 
-            const path = navigate(-1)? navigate(-1):'/home' 
-            navigate(path )
-        }
-        console.log(user)
+       
 
     }
+
+    useEffect(()=>{
+        if(loginStatus){
+            const path = navigate(-1)? navigate(-1):'/home' 
+            navigate(path)
+        }
+    },[loginStatus])
+
     return (
         <div className='container login-body p-3 mt-3'>
             <div className='d-flex justify-content-center align-items-center'>

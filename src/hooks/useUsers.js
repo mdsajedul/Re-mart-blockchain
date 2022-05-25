@@ -11,7 +11,7 @@ const useUsers = () =>{
 
 
     // user login function 
-    const login = (email,password) =>{
+    const login = async (email,password) =>{
         axios.post(`http://localhost:8000/login`,{
             email:email,
             password:password
