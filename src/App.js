@@ -8,6 +8,8 @@ import introGif from './Assets/gif/intro-2.gif'
 import ProductDetail from './Pages/ProductDetail/ProductDetail';
 import Login from './Pages/Login/Login';
 import UserProvider from './contexts/UserProvider';
+import SocketProvider from './contexts/SocketProvider';
+import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 
 function App() {
 
@@ -30,16 +32,19 @@ function App() {
         </div> 
         :
         <UserProvider>
+        <SocketProvider>
           <BrowserRouter>
-            <Navigation></Navigation>
+            <Navigation></Navigation> 
               <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/home" element={<Home/>} />
                 <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>
                 <Route path="/home/product-detail/:productId" element={<ProductDetail/>}></Route>
                 <Route path="login" element={<Login/>} />
+                <Route path="/dashboard" element={<Dashboard/>} />
               </Routes>
             </BrowserRouter>
+        </SocketProvider>
         </UserProvider>
       }
       

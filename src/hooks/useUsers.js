@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import io from "socket.io-client";
+
 
 const useUsers = () =>{
     
@@ -8,13 +8,10 @@ const useUsers = () =>{
     const [message,setMessage] = useState('')
     const [user, setUser] = useState({})
     const [loginStatus,setLoginStatus] =useState(false)
-    // const [socket,setSocket] = useState();
 
 
-    const socket = io.connect("http://localhost:8000");
-
+    // user login function 
     const login = (email,password) =>{
-
         axios.post(`http://localhost:8000/login`,{
             email:email,
             password:password
@@ -22,6 +19,8 @@ const useUsers = () =>{
         .then((response)=>{
             setUser(response.data.user)
             setMessage(response.data.message)
+            console.log(message)
+            console.log(response)
             setLoginStatus(true)
         })
         .catch((error)=>{
@@ -40,8 +39,8 @@ const useUsers = () =>{
         message,
         user,
         loginStatus,
-        logout,
-        socket
+        logout
+        
     }
 }
 export default useUsers;
