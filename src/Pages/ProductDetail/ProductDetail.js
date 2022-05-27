@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import useUserContext from '../../hooks/useUserContext';
 import useSocketContext from '../../hooks/useSocketContext';
+import nextId from "react-id-generator";
 
 
 const ProductDetail = () => {
@@ -61,6 +62,7 @@ const ProductDetail = () => {
         const reviewInfo ={
             username: user.username,
             role:user.role,
+            reviewId: nextId(),
             reviewData:{
                 rating: yourRating,
                 review: yourReview,

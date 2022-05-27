@@ -1,58 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import useSocketContext from '../../../hooks/useSocketContext';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import ReviewCard from '../ReviewCard.js/ReviewCard';
+import { css } from '@emotion/css';
+import useBlockchainContext from '../../../hooks/useBlockchainContext';
+
+
 
 
 const MiningPool = () => {
 
-    const {socket} = useSocketContext()
-    // const [reviewList,setReviewList] = useState([]);
-    var [reviewList, setReviewList] = useState([])
-    var [reviewListLocal,setReviewListLocal]=useState([])
 
-    useEffect(()=>{
-        socket.on('receive_reviews',(data)=>{
-            console.log(data)
-            // console.log(socket.id)
-            // reviewListLocal.push(data)
-            // localStorage.setItem('reviewList',JSON.stringify(reviewListLocal))
-            setReviewList((list)=>[...list,data]);
-        })
-    },[])
+    const {reviewList} = useBlockchainContext()
 
-    localStorage.setItem('reviewList',JSON.stringify(reviewList))
 
-    useEffect(()=>{
-        const getReveiw=  localStorage.getItem('reviewList')
-        setReviewListLocal(JSON.parse(getReveiw));
-    },[])
-    console.log(reviewList.length)
+
+    const ROOT_CSS = css({
+        height: 400,
+       
+      });
+      
     
     return (
         <div>
             <h2>Mining Pool</h2>
             <div>
+            <ScrollToBottom className={ROOT_CSS}>
                 {
                     reviewList.map(review=>{
                         return (
-                        <ScrollToBottom>
-                        <div key={review.username} className='row gx-0'>
-                            <div className='col-lg-9'>
-                                <p>{review?.username}</p>
-                                {/* <p>{review.reviewData.rating}</p>
-                                <p>{review.reviewData.review}</p>
-                                <p>{review.reviewData.product_id}</p> */}
-                            </div>
-                            <div className='col-lg-3'>
-                                <button >Add</button>
-                            </div>
-                                    
+                        <div key={review.reviewId} className='row gx-0'>
+                            <ReviewCard review={review} key={review.reviewId}/>
                              <hr />
                         </div>
-                        </ScrollToBottom>
+                       
                         )
                     })
                 }
+                </ScrollToBottom>
             </div>
         </div>
     );

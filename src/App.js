@@ -11,6 +11,7 @@ import UserProvider from './contexts/UserProvider';
 import SocketProvider from './contexts/SocketProvider';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './Pages/Login/PrivateRoute';
+import BlockchainProvider from './contexts/BlockchainProvider';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         :
         <UserProvider>
         <SocketProvider>
+        <BlockchainProvider>
           <BrowserRouter>
             <Navigation></Navigation> 
               <Routes>
@@ -45,6 +47,7 @@ function App() {
                 <Route path="/dashboard/*" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
               </Routes>
             </BrowserRouter>
+        </BlockchainProvider>
         </SocketProvider>
         </UserProvider>
       }
