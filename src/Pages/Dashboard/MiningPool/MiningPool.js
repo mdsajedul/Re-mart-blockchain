@@ -3,6 +3,13 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import ReviewCard from '../ReviewCard.js/ReviewCard';
 import { css } from '@emotion/css';
 import useBlockchainContext from '../../../hooks/useBlockchainContext';
+import axios from 'axios';
+
+
+
+
+// const {reviewPickList} = useBlockchainContext()
+
 
 
 
@@ -10,7 +17,19 @@ import useBlockchainContext from '../../../hooks/useBlockchainContext';
 const MiningPool = () => {
 
 
-    const {reviewList} = useBlockchainContext()
+    const {reviewList,reviewPickList} = useBlockchainContext()
+
+    const mineBlock=()=>{
+        axios.post(`http://localhost:8000/miner/mine`,{
+            data: reviewPickList
+        })
+        .then((response)=>{
+            console.log(response)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
 
 
 
@@ -22,7 +41,14 @@ const MiningPool = () => {
     
     return (
         <div>
-            <h2>Mining Pool</h2>
+            <div className='row gx-0 my-4 py-3  '>
+                <div className="col-lg-6">
+                    <h2>Mining Pool</h2>
+                </div>
+                <div className="col-lg-6 d-flex justify-content-center">
+                    <button className='btn btn-primary' onClick={mineBlock} >Mine Block</button>
+                </div>
+            </div>
             <div>
             <ScrollToBottom className={ROOT_CSS}>
                 {

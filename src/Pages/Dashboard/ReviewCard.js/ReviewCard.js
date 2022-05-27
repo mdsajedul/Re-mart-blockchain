@@ -13,8 +13,11 @@ const ReviewCard = ({review}) => {
     const pickReview =(data)=>{
         setdisabled(true)
         setReviewPickList(list=>[...list, data])
-        console.log(reviewPickList)
     }
+
+    useEffect(()=>{
+        console.log(reviewPickList)
+    },[reviewPickList])
 
     useEffect(()=>{
         if(user.username === review.username){
@@ -22,6 +25,8 @@ const ReviewCard = ({review}) => {
         }
         else setdisabled(false)
     },[user.username,review.username])
+
+    // console.log(reviewPickList)
 
     return (
         <>
