@@ -10,14 +10,23 @@ import useBlockchainContext from '../../../hooks/useBlockchainContext';
 
 const MiningPool = () => {
 
+    const [localData,setLocalData] = useState([])
+
 
     const {reviewList, mineBlock, mineResult, loading, message, reviewPickList} = useBlockchainContext()
     
     useEffect(()=>{
-        console.log(mineResult)
+        console.log(mineResult.Block)
+        setLocalData(mineResult.Block)
         console.log(reviewPickList)
-    },[mineResult])
+        localStorage.setItem('blocks',JSON.stringify(localData))
+        console.log(localData)
 
+    },[mineResult,reviewPickList,localData])
+
+
+    // const localData = localStorage.getItem('blocks');
+    // console.log('Local data : '+localData)
 
     const ROOT_CSS = css({
         height: 400,
@@ -64,13 +73,13 @@ const MiningPool = () => {
                             {
                                 loading ? 
                                 <div class="d-flex justify-content-center">
-                                    <div class="spinner-border" role="status">
+                                    <div class="spinner-border me-3" role="status">
                                         <span class="visually-hidden">Loading...</span>
-                                        <h3>Mining Block</h3>
                                     </div>
+                                    <h3 >Mining Block</h3>
                                 </div>
                                 :
-                                <div>
+                                <div className='d-flex justify-content-center'>
                                     <h3>{message}</h3>
                                 </div>
 

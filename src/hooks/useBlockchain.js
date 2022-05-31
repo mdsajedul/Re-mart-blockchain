@@ -37,6 +37,8 @@ const [message,setMessage] = useState('')
         else{
             setMessage('Please pick reviews');
         }
+
+        setReviewPickList([])
     }
 
     return {

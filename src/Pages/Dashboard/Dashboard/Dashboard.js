@@ -3,6 +3,8 @@ import './dashboard.css'
 import { Link, Route, Routes } from 'react-router-dom';
 import MiningPool from '../MiningPool/MiningPool';
 import useUserContext from '../../../hooks/useUserContext';
+import Blocks from '../Blocks/Blocks';
+import BlockDetail from '../BlockDetail/BlockDetail';
 
 const Dashboard = () => {
     const {user} = useUserContext()
@@ -18,7 +20,7 @@ const Dashboard = () => {
                         </div>
                         <div className='left-btn-group'>
                             <Link className='left-btn' to='mining-pool' >Mining Pool</Link>
-                            <Link className='left-btn' to='write-blog' >Mine Block</Link> 
+                            <Link className='left-btn' to='blocks' >Blocks</Link> 
                         </div>
                         
                     </div>
@@ -28,6 +30,7 @@ const Dashboard = () => {
                         <Routes>
                             <Route path="/" element={<MiningPool/>}/>
                             <Route path="mining-pool" element={<MiningPool/>}/>
+                            <Route path='blocks/*' element={<Blocks/>} />
                         </Routes>
                     </div>
                 </div>
