@@ -5,13 +5,10 @@ import BlockDetail from '../BlockDetail/BlockDetail';
 
 const Blocks = () => {
 
-    const { mineResult} = useBlockchainContext()
-    const [blocks,setBlocks] = useState([])
-
-    useEffect(()=>{
-        setBlocks(mineResult.Block)
-        console.log(blocks)
-    },[mineResult,blocks])
+    const { blocks} = useBlockchainContext()
+    
+    // console.log(blocks)
+  
 
     return (
         <div>
@@ -20,7 +17,7 @@ const Blocks = () => {
                 <div className="col-lg-6">
                     <h3>Latest Blocks</h3>
                     <p>The most recently mined blocks</p>
-                    <div>
+                    <div className='p-3'>
                         <table class="table">
                             
                         <thead>
@@ -31,7 +28,7 @@ const Blocks = () => {
                         </thead>
                         <tbody>
                             {
-                                blocks.map(block=>{
+                                blocks?.map(block=>{
                                     return( 
                                             <tr>
                                                 <Link to={`block-detail/${block.index}`}>

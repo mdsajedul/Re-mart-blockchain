@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
+import useSocketContext from "./useSocketContext";
 
 const useBlockchain=()=>{
 
@@ -8,6 +9,8 @@ const [reviewPickList,setReviewPickList] = useState([]);
 const [loading,setLoading] = useState(false)
 const [mineResult,setMineResult] = useState([])
 const [message,setMessage] = useState('')
+const [blocks,setBlocks] = useState([])
+const {socket} = useSocketContext()
 
 // let reviewPickList =[];
 
@@ -16,6 +19,15 @@ const [message,setMessage] = useState('')
         fetch(`http://localhost:8000/miner/getMempoolData`)
         .then(res=>res.json())
         .then(data=>setReviewList(data.reviews))
+    })
+
+
+    useEffect(()=>{
+        fetch(`http://localhost:8000/miner/blocks`)
+        .then(res=>res.json())
+        .then(data=>{
+            setBlocks(data)
+        })
     })
 
     const mineBlock=()=>{
@@ -33,6 +45,10 @@ const [message,setMessage] = useState('')
             .catch((error)=>{
                 console.log(error)
             })
+
+
+            // socket.emit('mineBlock',reviewPickList)
+
         }
         else{
             setMessage('Please pick reviews');
@@ -42,7 +58,7 @@ const [message,setMessage] = useState('')
     }
 
     return {
-        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message
+        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message, blocks
     }
 
 }
