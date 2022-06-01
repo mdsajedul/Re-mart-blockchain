@@ -3,6 +3,11 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import ReviewCard from '../ReviewCard.js/ReviewCard';
 import { css } from '@emotion/css';
 import useBlockchainContext from '../../../hooks/useBlockchainContext';
+import axios from 'axios';
+import useSocketContext from '../../../hooks/useSocketContext';
+
+
+
 
 
 
@@ -11,9 +16,11 @@ import useBlockchainContext from '../../../hooks/useBlockchainContext';
 const MiningPool = () => {
 
     const [localData,setLocalData] = useState([])
+    
+    const {socket} = useSocketContext()
 
 
-    const {reviewList, mineBlock, mineResult, loading, message, reviewPickList} = useBlockchainContext()
+    const {reviewList, mineResult, loading, message, reviewPickList,setLoading,setMineResult,setMessage,setReviewPickList} = useBlockchainContext()
     
     useEffect(()=>{
         console.log(mineResult.Block)
@@ -23,6 +30,34 @@ const MiningPool = () => {
         console.log(localData)
 
     },[mineResult,reviewPickList,localData])
+
+
+    const mineBlock=()=>{
+        
+        if(reviewPickList.length > 0 ){
+            setLoading(true)
+            axios.post(`http://localhost:8000/miner/mine`,{
+                data: reviewPickList
+            })
+            .then((response)=>{
+                setMineResult(response.data)
+                setMessage(response.data.message)
+                setLoading(false)
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+
+
+        // socket.emit('mine_block',reviewPickList)
+
+        }
+        else{
+            setMessage('Please pick reviews');
+        }
+
+        setReviewPickList([])
+    }
 
 
     // const localData = localStorage.getItem('blocks');

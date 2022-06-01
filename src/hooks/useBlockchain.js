@@ -58,7 +58,7 @@ const {socket} = useSocketContext()
     }
 
     return {
-        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message, blocks
+        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message, blocks,setMineResult,setLoading,setMessage
     }
 
 }
