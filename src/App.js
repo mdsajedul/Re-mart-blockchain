@@ -12,6 +12,7 @@ import SocketProvider from './contexts/SocketProvider';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './Pages/Login/PrivateRoute';
 import BlockchainProvider from './contexts/BlockchainProvider';
+import NotFound from './Pages/Shared/NotFound';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           <BrowserRouter>
             <Navigation></Navigation> 
               <Routes>
+                <Route path='*' element={<NotFound/>}/>
                 <Route path="/" element={<Home/>} />
                 <Route path="/home" element={<Home/>} />
                 <Route path="/product-detail/:productId" element={<ProductDetail/>}></Route>

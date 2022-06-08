@@ -20,9 +20,10 @@ const MiningPool = () => {
     const {socket} = useSocketContext()
 
 
-    const {reviewList, mineResult, loading, message, reviewPickList,setLoading,setMineResult,setMessage,setReviewPickList} = useBlockchainContext()
+    const {reviewList, mineResult, loading, message, reviewPickList,setLoading,setMineResult,setMessage,setReviewPickList,setReviewList} = useBlockchainContext()
     
     useEffect(()=>{
+        
         console.log(mineResult.Block)
         setLocalData(mineResult.Block)
         console.log(reviewPickList)
@@ -43,6 +44,18 @@ const MiningPool = () => {
                 setMineResult(response.data)
                 setMessage(response.data.message)
                 setLoading(false)
+
+                console.log('New Review List')
+                console.log(reviewPickList)
+
+                const newReviewList = reviewList.filter(({reviewId: id1})=> !reviewPickList.some(({reviewId : id2})=> id2 === id1) )
+                
+                axios.post(`http://localhost:8000/miner/deleteReview`,{
+                    data:newReviewList
+                })
+
+                // setReviewList(...newReviewList);
+                console.log(newReviewList)
             })
             .catch((error)=>{
                 console.log(error)

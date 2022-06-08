@@ -18,7 +18,10 @@ const {socket} = useSocketContext()
     useEffect(()=>{
         fetch(`http://localhost:8000/miner/getMempoolData`)
         .then(res=>res.json())
-        .then(data=>setReviewList(data.reviews))
+        .then(data=>{
+            setReviewList(data.reviews)
+            localStorage.setItem('reviews',JSON.stringify(data.reviews))
+        })
     })
 
 
@@ -27,6 +30,7 @@ const {socket} = useSocketContext()
         .then(res=>res.json())
         .then(data=>{
             setBlocks(data)
+            localStorage.setItem('blocks',JSON.stringify(data))
         })
     })
 
@@ -58,7 +62,7 @@ const {socket} = useSocketContext()
     }
 
     return {
-        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message, blocks,setMineResult,setLoading,setMessage
+        reviewList,reviewPickList,setReviewPickList, mineBlock, mineResult, loading,message, blocks,setMineResult,setLoading,setMessage,setReviewList
     }
 
 }
