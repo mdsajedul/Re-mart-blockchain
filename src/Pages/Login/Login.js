@@ -166,7 +166,7 @@ const Login = () => {
                         {
                             loginPage===false && <div>
                                <select onChange={(event)=>{setRole(event.target.value)}} className="form-select" aria-label="Default select example">
-                                        <option defaultValue='user' value="User">User</option>
+                                        <option defaultValue='user' value="user">User</option>
                                         <option value="miner">Miner</option>
                                     </select>
                             </div>
