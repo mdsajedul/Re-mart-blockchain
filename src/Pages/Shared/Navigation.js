@@ -29,7 +29,7 @@ const Navigation = () => {
                     </ul>
                     <div>
                         {
-                            loginStatus? (
+                            loginStatus && user? (
                             <div className='d-flex align-items-baseline'>
                                 <p className='me-3' style={{color:"#666666"}}>Hello <span style={{color:'#206020'}}>{user?.username}</span></p>
                                 {

@@ -20,7 +20,7 @@ const useUsers = () =>{
             setUser(response.data.user)
             setMessage(response.data.message)
             console.log(message)
-            console.log(response)
+            console.log(response.data)
             setLoginStatus(true)
         })
         .catch((error)=>{
@@ -29,17 +29,45 @@ const useUsers = () =>{
         })
     }
 
+    //user registration funtion 
+    const register = async (username,email,password,role) =>{
+        console.log(username,email,password,role)
+        console.log('register click')
+        axios.post(`http://localhost:8000/register`,{
+            username:username,
+            email:email,
+            password:password,
+            role:role
+        })
+        .then((response)=>{
+            setMessage(response.data.message)
+            console.log('success'+message)
+            console.log(response)
+        }
+        )
+        .catch((error)=>{
+            setMessage(error.data.message)
+            console.log('error'+message)
+        }
+        )
+    }
+
+
+
     const logout = () =>{
         setLoginStatus(false);
         setUser('')
+        setMessage('')
     }
 
     return{
         login,
+        register,
         message,
         user,
         loginStatus,
-        logout
+        logout,
+        setMessage
         
     }
 }
